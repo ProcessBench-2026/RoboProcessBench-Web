@@ -60,11 +60,9 @@ thumbnail: screenshot-light.png
 import HighlightedSection from "./components/HighlightedSection.astro";
 import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import TeaserCard from "./components/TeaserCard.astro";
 import FindingBlock from "./components/FindingBlock.astro";
 import SourceCard from "./components/SourceCard.astro";
-import ExampleBlock from "./components/ExampleBlock.astro";
 
 import overviewPng from "./pages/assets/overview.png";
 
@@ -252,65 +250,6 @@ ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning 
   </div>
 </div>
 
-{/* ============================================================
-     SECTION 7: QUALITATIVE EXAMPLES
-     ============================================================ */}
-
-## 🔬 Qualitative examples
-
-<Tabs defaultValue="contact">
-  <TabsList>
-    <TabsTrigger value="contact">Contact</TabsTrigger>
-    <TabsTrigger value="progress">Progress</TabsTrigger>
-    <TabsTrigger value="temporal">Temporal failure</TabsTrigger>
-    <TabsTrigger value="next">Next primitive</TabsTrigger>
-  </TabsList>
-  <TabsContent value="contact">
-    <ExampleBlock
-      title="Contact detection"
-      frames={[]}
-      question="Has the gripper made contact with the object?"
-      gtAnswer="Yes"
-      predAnswer="Yes"
-      explanation="The VLM correctly detects the contact point from the visual frame."
-    />
-  </TabsContent>
-  <TabsContent value="progress">
-    <ExampleBlock
-      title="Primitive-local progress"
-      frames={[]}
-      question="Is the current primitive early, middle, or late?"
-      gtAnswer="Middle"
-      predAnswer="Late"
-      explanation="The VLM overestimates progress; fine-grained temporal cues remain challenging."
-    />
-  </TabsContent>
-  <TabsContent value="temporal">
-    <ExampleBlock
-      title="Temporal ordering — failure case"
-      frames={[]}
-      question="What is the correct order of frames A, B, C?"
-      gtAnswer="A → C → B"
-      predAnswer="A → B → C"
-      explanation="Temporal ordering (T8) remains near chance for most VLMs. Subtle motion cues are easily confused."
-      isFailure={true}
-    />
-  </TabsContent>
-  <TabsContent value="next">
-    <ExampleBlock
-      title="Next primitive prediction"
-      frames={[]}
-      question="What primitive should happen next?"
-      gtAnswer="Grasp"
-      predAnswer="Grasp"
-      explanation="Primitive-chain reasoning from visual context is a relative strength."
-    />
-  </TabsContent>
-</Tabs>
-
-{/* ============================================================
-     SECTION 8: RELEASE & CITATION
-     ============================================================ */}
 
 ## 🚀 Release
 
@@ -318,22 +257,22 @@ ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning 
   <div class="rounded-xl border border-border bg-card p-5">
     <h4 class="!mt-0">💾 Dataset</h4>
     <p class="text-xs text-muted-foreground">ProcessData-SFT & ProcessData-Eval, metadata, splits, annotation details.</p>
-    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Download</a>
+    <span class="inline-block mt-2 cursor-default rounded-full bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground">Coming soon</span>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
     <h4 class="!mt-0">🧪 Evaluation</h4>
     <p class="text-xs text-muted-foreground">Prompt templates, scoring scripts, per-task evaluation protocol.</p>
-    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Scripts</a>
+    <span class="inline-block mt-2 cursor-default rounded-full bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground">Coming soon</span>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
     <h4 class="!mt-0">🧠 Models</h4>
     <p class="text-xs text-muted-foreground">ProcessData-SFT-Qwen, ProcessData-SFT-Intern checkpoints.</p>
-    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Checkpoints</a>
+    <span class="inline-block mt-2 cursor-default rounded-full bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground">Coming soon</span>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
     <h4 class="!mt-0">📖 Documentation</h4>
     <p class="text-xs text-muted-foreground">Construction details, license, reproducibility guide.</p>
-    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Docs</a>
+    <span class="inline-block mt-2 cursor-default rounded-full bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground">Coming soon</span>
   </div>
 </div>
 
@@ -348,10 +287,7 @@ If you use RoboProcessBench, ProcessData, or the evaluation suite, please cite:
   author    = {Xia, Dayu and Shi, Yue and Mu, Yao and Ji, Huiting and
                Ma, Chaofan and Zhou, Yingjie and Chen, Hua and
                Liu, Yang and Cao, Jiezhang and Zhai, Guangtao},
-  year      = {2025},
+  year      = {2026},
 }
 ```
 
-## Bibliography
-
-[^ref]
