@@ -1,5 +1,5 @@
 ---
-title: RoboProcessBench：Benchmarking Process-Aware Understanding in Vision-Language Robotic Manipulation
+title: "RoboProcessBench: Benchmarking Process-Aware Understanding in Vision-Language Robotic Manipulation"
 authors:
   - name: Dayu Xia
     notes: ["1", "3", "*"]
@@ -39,26 +39,24 @@ notes:
     text: Corresponding authors
 links:
   - name: Paper
-    url: https://github.com/RomanHauksson/academic-project-astro-template
+    url: "#"
     icon: ri:file-pdf-2-line
   - name: Code
-    url: https://github.com/RomanHauksson/academic-project-astro-template
+    url: "#"
     icon: ri:github-line
-  - name: arXiv
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: academicons:arxiv
-  - name: Slides
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: ri:slideshow-2-line
+  - name: Data
+    url: "#"
+    icon: ri:database-2-line
+  - name: Leaderboard
+    url: "#leaderboard"
+    icon: ri:bar-chart-line
+  - name: BibTeX
+    url: "#citation"
+    icon: ri:code-s-slash-line
 
-# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
 theme: device
-
-# This is the icon that appears in the user's browser tab. To customize, change the favicon.svg file in /public/, or add your own file to /public/ and change the filename here.
 favicon: favicon.svg
-
-# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
-description: Simple project page template for your research paper, built with Astro and Tailwind
+description: "RoboProcessBench: a process-aware benchmark and supervision corpus evaluating whether VLMs understand how robotic manipulation unfolds, with 12 diagnostic task families and ~58k QA items."
 thumbnail: screenshot-light.png
 ---
 
@@ -67,7 +65,6 @@ import HighlightedSection from "./components/HighlightedSection.astro";
 import SmallCaps from "./components/SmallCaps.astro";
 import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
-import ModelViewer from "./components/ModelViewer.astro"
 import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
 import Carousel from "./components/Carousel.astro";
@@ -75,151 +72,311 @@ import CarouselSlide from "./components/CarouselSlide.astro";
 import Wide from "./components/Wide.astro";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import { Comparison } from "./components/Comparison.tsx";
+import TeaserCard from "./components/TeaserCard.astro";
+import TaskCard from "./components/TaskCard.astro";
+import FindingBlock from "./components/FindingBlock.astro";
+import SourceCard from "./components/SourceCard.astro";
+import ExampleBlock from "./components/ExampleBlock.astro";
 
-import outside from "./assets/outside.mp4";
-import dogsDiffc from "./assets/dogs-diffc.png"
-import dogsTrue from "./assets/dogs-true.png"
-import dogsMsillm from "@/assets/dogs-msillm.jpg"
-
-<Video src={outside} />
+{/* ============================================================
+     SECTION 1: HERO PUNCHLINE (below the template's title/authors/links)
+     ============================================================ */}
 
 <HighlightedSection>
 
-## Abstract
+**RoboProcessBench** evaluates whether VLMs understand *how* robotic manipulation unfolds, not only whether it succeeds.
 
-This is a template you can use to create a professional project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+A process-aware benchmark and supervision corpus with 12 diagnostic task families, ~58k QA items, 260 manipulation tasks, and SFT-trained VLM process evaluators.
 
 </HighlightedSection>
 
-## Visuals
+{/* ============================================================
+     SECTION 2: TEASER CARDS
+     ============================================================ */}
 
-### Picture
+<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-3">
+  <TeaserCard
+    title="Process-aware evaluation"
+    description="12 diagnostic QA families covering phase, contact, motion, progress, temporal order, outcome, and primitive chains."
+  />
+  <TeaserCard
+    title="ProcessData-58k"
+    description="~58k QA items across 260 manipulation tasks from physically grounded execution traces."
+  />
+  <TeaserCard
+    title="Trainable process evaluators"
+    description="SFT on ProcessData improves Qwen- and InternVL-based VLMs on local state, motion, progress, and primitive-aware cues."
+  />
+</div>
 
-Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
+{/* ============================================================
+     SECTION 3: WHY PROCESS-AWARE?
+     ============================================================ */}
 
-<Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+## Why process-aware?
 
-### Wide visual
+<div class="not-prose grid grid-cols-1 gap-6 md:grid-cols-2">
+  <div class="rounded-xl border border-border bg-card p-5">
 
-I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
+##### Outcome-only evaluation
 
-<Wide>
-  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-</Wide>
+**Did the task succeed?** Only the final success state is considered.
 
-### Figure with caption
+  </div>
+  <div class="rounded-xl border border-border bg-card p-5">
 
-Wrap a visual in a `Figure` component to add a caption.
+##### Process-aware evaluation
 
-<Figure>
-  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
-</Figure>
+<ul>
+  <li>Has contact been established?</li>
+  <li>Is the robot still moving?</li>
+  <li>Is the primitive early, middle, or late?</li>
+  <li>Are frames temporally consistent?</li>
+  <li>What primitive should happen next?</li>
+</ul>
 
-### Comparison slider
+  </div>
+</div>
 
-Use the `Comparison` component to compare two visuals with an interactive slider.
+{/* ============================================================
+     SECTION 4: 12 TASK TAXONOMY
+     ============================================================ */}
 
-<Comparison client:idle >
-  <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Picture slot="itemTwo" src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-</Comparison>
+## Task taxonomy
 
-### Tab panels
+### Static Monitoring
 
-Tab panels are a great way to display a labeled collection of related visuals without taking up too much space.
+<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <TaskCard id="T1" name="Phase Recognition" inputType="single frame" question="Which phase is the robot currently in?" />
+  <TaskCard id="T2" name="Contact Detection" inputType="single frame" question="Has the gripper made contact with the object?" />
+  <TaskCard id="T4" name="Bimanual Coordination" inputType="single frame" question="Are both arms operating in a coordinated manner?" />
+  <TaskCard id="T10" name="Current Primitive Recognition" inputType="single frame" question="Which primitive is the robot currently executing?" />
+</div>
 
-<Tabs defaultValue="true">
-  <TabsList>
-    <TabsTrigger value="true">Ground truth</TabsTrigger>
-    <TabsTrigger value="diffc">DiffC (Flux-dev)</TabsTrigger>
-    <TabsTrigger value="msillm">MS-ILLM</TabsTrigger>
-  </TabsList>
-  <TabsContent value="true">
-    <Picture
-      src={dogsTrue}
-      alt="True photo of two dogs running side-by-side in shallow water"
-    />
-  </TabsContent>
-  <TabsContent value="diffc">
-    <Picture
-      src={dogsDiffc}
-      alt="Photo of two running dogs, lossily compressed using the DiffC algorithm"
-    />
-  </TabsContent>
-  <TabsContent value="msillm">
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </TabsContent>
-</Tabs>
+### Dynamic Reasoning
 
-### Carousel
+<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <TaskCard id="T3" name="Motion Direction" inputType="ordered clip" question="In which direction is the end-effector moving?" />
+  <TaskCard id="T5" name="Primitive-local Progress" inputType="ordered clip" question="How far along is the current primitive? (early / middle / late)" />
+  <TaskCard id="T6" name="Motion State" inputType="ordered clip" question="Is the robot currently moving or stopped?" />
+  <TaskCard id="T7" name="Outcome Prediction" inputType="ordered clip" question="Will this manipulation succeed?" />
+  <TaskCard id="T8" name="Temporal Ordering" inputType="shuffled frames" question="What is the correct chronological order of these frames?" />
+  <TaskCard id="T9" name="Temporal Priority" inputType="pairwise frames" question="Which frame occurs earlier in the manipulation?" />
+  <TaskCard id="T11" name="Next Primitive" inputType="ordered clip" question="What primitive should the robot execute next?" />
+  <TaskCard id="T12" name="Primitive Chain Restoration" inputType="shuffled primitives" question="What is the correct sequence of primitives for this task?" />
+</div>
 
-A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
+{/* ============================================================
+     SECTION 5: DATASET
+     ============================================================ */}
 
-<Carousel>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="True photo of two dogs running side-by-side in shallow water" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture
-      src={dogsMsillm}
-      alt="Photo of two running dogs, lossily compressed using MS-ILLM"
-    />
-  </CarouselSlide>
-</Carousel>
+## ProcessData-58k
 
-## Two columns
+ProcessData is constructed from four physically grounded manipulation datasets, each contributing distinct process-relevant supervision signals.
 
-Use the two columns component to display two columns of content. In this example, the first column contains a YouTube video embed and the second column contains an interactive 3D model viewer. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
+  <SourceCard name="GM-100" description="Long-tail goal-conditioned manipulation trajectories." />
+  <SourceCard name="RH20T" description="Contact-rich multimodal demonstration traces." />
+  <SourceCard name="REASSEMBLE" description="Primitive-level action chains with fine-grained segmentation." />
+  <SourceCard name="AIST-Bimanual" description="Bimanual motion and coordination sequences." />
+</div>
 
-<TwoColumns>
-  <YouTubeVideo slot="left" videoId="wjZofJX0v4M" />
-  <ModelViewer slot="right" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
-</TwoColumns>
+### Coverage matrix
 
-## $\LaTeX$
+| Signal | GM-100 | RH20T | REASSEMBLE | AIST-Bimanual |
+| :--- | :---: | :---: | :---: | :---: |
+| Phase | ✓ | ✓ | ✓ |   |
+| Contact |   | ✓ | ✓ |   |
+| Motion | ✓ | ✓ |   | ✓ |
+| Primitive |   |   | ✓ |   |
+| Progress | ✓ | ✓ | ✓ |   |
+| Bimanual |   |   |   | ✓ |
 
-You can also add $\LaTeX$ formulas, rendered during the build process using [$\KaTeX$](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: $a^2 + b^2 = c^2$. Or, you can write them as a block:
+{/* ============================================================
+     SECTION 6: RESULTS
+     ============================================================ */}
 
-$$
-\int_a^b f(x) dx
-$$
+## Results
+
+### Key findings
+
+Current VLMs are fragmented: they can recognize some local states, but struggle with primitive-local progress and temporal reasoning.
+
+<div class="not-prose space-y-3">
+  <FindingBlock number={1} title="Zero-shot strengths are fragmented. No single VLM excels across all 12 tasks; strengths cluster by task family." />
+  <FindingBlock number={2} title="Local process states are easier than local progress. VLMs recognize static states (contact, phase) but fail on within-primitive progress estimation (T5)." />
+  <FindingBlock number={3} title="Temporal reconstruction remains near chance. Temporal ordering (T8) and temporal priority (T9) are the hardest tasks across all models." />
+</div>
+
+### Compact results
+
+| Category | Avg. Accuracy |
+| :--- | :---: |
+| Static Monitoring (T1, T2, T4, T10) | — |
+| Dynamic Reasoning (T3, T5–T9, T11, T12) | — |
+| Hardest tasks (T5, T8, T9) | — |
+
+<details>
+<summary>Show full benchmark table (14 models × 12 tasks)</summary>
+
+Full benchmark results will be available upon release. Check back soon for the complete leaderboard.
+
+</details>
+
+{/* ============================================================
+     SECTION 7: SFT
+     ============================================================ */}
+
+## ProcessData-SFT: from benchmark to trainable supervision
+
+Beyond benchmarking, ProcessData enables supervised fine-tuning to build dedicated process evaluators.
+
+<div class="not-prose text-center text-sm text-muted-foreground space-y-1 italic">
+  <div>Base VLM (Qwen2.5-VL-7B / InternVL-3-8B)</div>
+  <div>↓ SFT on ProcessData-SFT</div>
+  <div>Process evaluator</div>
+  <div>↓ held-out ProcessData-Eval</div>
+  <div>Improved local state / motion / primitive-aware reasoning</div>
+</div>
+
+### Task-family-level improvements
+
+SFT brings notable gains on specific diagnostic dimensions:
+
+| Task | Description | Improvement |
+| :--- | :--- | :---: |
+| T2 | Contact Detection | — |
+| T3 | Motion Direction | — |
+| T5 | Primitive-local Progress | — |
+| T8 | Temporal Ordering | — |
+| T11 | Next Primitive | — |
+
+{/* ============================================================
+     SECTION 8: QUALITATIVE EXAMPLES
+     ============================================================ */}
+
+## Qualitative examples
+
+<ExampleBlock
+  title="Contact detection"
+  frames={[]}
+  question="Has the gripper made contact with the object?"
+  gtAnswer="Yes"
+  predAnswer="Yes"
+  explanation="The VLM correctly detects the contact point from the visual frame."
+/>
+
+<ExampleBlock
+  title="Primitive-local progress"
+  frames={[]}
+  question="Is the current primitive early, middle, or late?"
+  gtAnswer="Middle"
+  predAnswer="Late"
+  explanation="The VLM overestimates progress; fine-grained temporal cues remain challenging."
+/>
+
+<ExampleBlock
+  title="Temporal ordering — failure case"
+  frames={[]}
+  question="What is the correct order of frames A, B, C?"
+  gtAnswer="A → C → B"
+  predAnswer="A → B → C"
+  explanation="Temporal ordering (T8) remains near chance for most VLMs. Subtle motion cues are easily confused."
+  isFailure={true}
+/>
+
+<ExampleBlock
+  title="Next primitive prediction"
+  frames={[]}
+  question="What primitive should happen next?"
+  gtAnswer="Grasp"
+  predAnswer="Grasp"
+  explanation="Primitive-chain reasoning from visual context is a relative strength of process-aware VLMs."
+/>
+
+{/* ============================================================
+     SECTION 9: LEADERBOARD
+     ============================================================ */}
+
+## Leaderboard
+
+We report task-wise accuracy across 12 diagnostic process-understanding families.
+
+| Model | Static Avg. | Dynamic Avg. | T5 Progress | T8 Temporal Order | T9 Temporal Priority | Overall |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| GPT-4o | — | — | — | — | — | — |
+| Gemini-2.5-Pro | — | — | — | — | — | — |
+| Qwen2.5-VL-72B | — | — | — | — | — | — |
+| InternVL-3-78B | — | — | — | — | — | — |
+| Qwen2.5-VL-7B | — | — | — | — | — | — |
+| InternVL-3-8B | — | — | — | — | — | — |
+| ProcessData-SFT-Qwen | — | — | — | — | — | — |
+| ProcessData-SFT-Intern | — | — | — | — | — | — |
+
+<details>
+<summary>Show full 12-task breakdown</summary>
+
+Full per-task results across all 14 models will be released with the dataset.
+
+</details>
+
+{/* ============================================================
+     SECTION 10: RELEASE
+     ============================================================ */}
+
+## Release & reproducibility
+
+<div class="not-prose grid grid-cols-1 gap-6 md:grid-cols-2">
+  <div class="rounded-xl border border-border bg-card p-5">
+
+**Resources**
+
+<ul>
+  <li><strong>ProcessData-SFT</strong> — training set for supervised fine-tuning</li>
+  <li><strong>ProcessData-Eval</strong> — held-out evaluation set</li>
+  <li><strong>Evaluation prompts</strong> — task templates and scoring protocols</li>
+  <li><strong>Metadata & splits</strong> — task taxonomy, train/test splits</li>
+</ul>
+
+  </div>
+  <div class="rounded-xl border border-border bg-card p-5">
+
+**Links**
+
+<ul>
+  <li>Code repository</li>
+  <li>Dataset download</li>
+  <li>Evaluation scripts</li>
+  <li>Model checkpoints</li>
+  <li>Annotation & construction details</li>
+  <li>License</li>
+</ul>
+
+  </div>
+</div>
+
+{/* ============================================================
+     SECTION 11: CITATION
+     ============================================================ */}
 
 ## Citation
 
-If you copy your bibliography into `./bibliography.bib`, you can cite papers using their BibTeX keys, and they'll be automatically formatted and included in the bibliography section at the end. For example: [@vaswani2017attention]. Note that these citations are distinct from footnotes[^mynote], which show up in a separate section if you use them.
-
-[^mynote]: On the web, they should really be called "endnotes", since each page constitutes a full document.
-
-## Table
-
-Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
-
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
-
-## BibTeX citation
-
-Displaying the BibTeX entry for your paper in a code block makes it easy to copy and paste.
+If you use RoboProcessBench, ProcessData, or the evaluation suite, please cite:
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@inproceedings{xia2025roboprocessbench,
+  title     = {RoboProcessBench: Benchmarking Process-Aware Understanding in
+               Vision-Language Robotic Manipulation},
+  author    = {Xia, Dayu and Shi, Yue and Mu, Yao and Ji, Huiting and
+               Ma, Chaofan and Zhou, Yingjie and chan, Hua and
+               Liu, Yang and Cao, Jiezhang and Zhai, Guangtao},
+  year      = {2025},
 }
 ```
+
+{/* ============================================================
+     BIBLIOGRAPHY
+     ============================================================ */}
 
 ## Bibliography
 

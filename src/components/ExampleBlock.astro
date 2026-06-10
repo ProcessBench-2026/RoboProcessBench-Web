@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title: string;
+  frames: { src: string; alt: string }[];
+  question: string;
+  gtAnswer: string;
+  predAnswer: string;
+  explanation: string;
+  isFailure?: boolean;
+}
+
+const { title, frames, question, gtAnswer, predAnswer, explanation, isFailure = false } =
+  Astro.props;
+---
+
+<div class={`rounded-xl border p-5 ${isFailure ? 'border-orange-300 bg-orange-50 dark:border-orange-800 dark:bg-orange-950/30' : 'border-border bg-card'}`}>
+  <div class="mb-2 flex items-center gap-2">
+    <h4 class="!mt-0 text-base font-semibold text-card-foreground">{title}</h4>
+    {
+      isFailure && (
+        <span class="rounded bg-orange-200 px-2 py-0.5 text-xs font-medium text-orange-800 dark:bg-orange-800 dark:text-orange-200">
+          Failure case
+        </span>
+      )
+    }
+  </div>
+  <div class="mb-3 flex flex-wrap gap-2">
+    {frames.map((f) => (
+      <img src={f.src} alt={f.alt} class="h-20 rounded border border-border object-cover" loading="lazy" />
+    ))}
+  </div>
+  <div class="space-y-1 text-sm">
+    <p class="!my-0"><strong>Q:</strong> {question}</p>
+    <p class="!my-0"><strong>Ground truth:</strong> {gtAnswer}</p>
+    <p class="!my-0"><strong>Prediction:</strong> <span class={isFailure ? 'text-orange-600 font-medium' : 'text-green-600 font-medium'}>{predAnswer}</span></p>
+    <p class="!my-0 mt-2 text-xs text-muted-foreground">{explanation}</p>
+  </div>
+</div>

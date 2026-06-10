@@ -99,21 +99,21 @@ main .katex-display {
 
 :root {
   --background: var(--color-white);
-  --foreground: var(--color-zinc-950);
+  --foreground: var(--color-slate-950);
   --card: var(--color-white);
-  --card-foreground: var(--color-zinc-950);
+  --card-foreground: var(--color-slate-950);
   --popover: var(--color-white);
-  --popover-foreground: var(--color-zinc-950);
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-zinc-50);
+  --popover-foreground: var(--color-slate-950);
+  --primary: var(--color-blue-900);
+  --primary-foreground: var(--color-blue-50);
   --primary-accent: var(--color-blue-700);
-  --secondary: var(--color-fuchsia-700);
-  --secondary-foreground: var(--color-zinc-50);
-  --secondary-accent: var(--color-fuchsia-700);
-  --muted: var(--color-zinc-100);
-  --muted-foreground: var(--color-zinc-600);
-  --accent: var(--color-zinc-100);
-  --accent-foreground: var(--color-zinc-900);
+  --secondary: var(--color-orange-600);
+  --secondary-foreground: var(--color-white);
+  --secondary-accent: var(--color-orange-500);
+  --muted: var(--color-blue-50);
+  --muted-foreground: var(--color-slate-600);
+  --accent: var(--color-blue-50);
+  --accent-foreground: var(--color-blue-950);
   --info: var(--color-sky-300);
   --info-foreground: var(--color-sky-950);
   --success: var(--color-green-300);
@@ -122,29 +122,29 @@ main .katex-display {
   --warning-foreground: var(--color-amber-950);
   --error: var(--color-red-700);
   --error-foreground: var(--color-zinc-50);
-  --border: var(--color-zinc-200);
-  --input: var(--color-zinc-200);
-  --outline: var(--color-zinc-400);
+  --border: var(--color-blue-100);
+  --input: var(--color-blue-100);
+  --outline: var(--color-blue-400);
   --radius: 0.625rem;
 }
 
 .dark {
-  --background: var(--color-zinc-950);
-  --foreground: var(--color-zinc-50);
-  --card: var(--color-zinc-900);
-  --card-foreground: var(--color-zinc-50);
-  --popover: var(--color-zinc-800);
-  --popover-foreground: var(--color-zinc-50);
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-zinc-50);
+  --background: var(--color-slate-950);
+  --foreground: var(--color-slate-50);
+  --card: var(--color-slate-900);
+  --card-foreground: var(--color-slate-50);
+  --popover: var(--color-slate-800);
+  --popover-foreground: var(--color-slate-50);
+  --primary: var(--color-blue-800);
+  --primary-foreground: var(--color-blue-100);
   --primary-accent: var(--color-blue-400);
-  --secondary: var(--color-fuchsia-700);
-  --secondary-foreground: var(--color-zinc-50);
-  --secondary-accent: var(--color-fuchsia-400);
-  --muted: var(--color-zinc-800);
-  --muted-foreground: var(--color-zinc-400);
-  --accent: var(--color-zinc-700);
-  --accent-foreground: var(--color-zinc-100);
+  --secondary: var(--color-orange-500);
+  --secondary-foreground: var(--color-white);
+  --secondary-accent: var(--color-orange-400);
+  --muted: var(--color-slate-800);
+  --muted-foreground: var(--color-slate-400);
+  --accent: var(--color-blue-900);
+  --accent-foreground: var(--color-blue-100);
   --info: var(--color-sky-300);
   --info-foreground: var(--color-sky-950);
   --success: var(--color-green-300);
@@ -153,9 +153,9 @@ main .katex-display {
   --warning-foreground: var(--color-amber-950);
   --error: var(--color-red-800);
   --error-foreground: var(--color-zinc-50);
-  --border: --alpha(var(--color-zinc-50) / 10%);
-  --input: --alpha(var(--color-zinc-50) / 15%);
-  --outline: var(--color-zinc-500);
+  --border: --alpha(var(--color-slate-50) / 10%);
+  --input: --alpha(var(--color-slate-50) / 15%);
+  --outline: var(--color-slate-500);
 }
 
 @layer base {
