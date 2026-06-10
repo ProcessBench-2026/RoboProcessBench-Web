@@ -58,13 +58,15 @@ thumbnail: screenshot-light.png
 ---
 
 import HighlightedSection from "./components/HighlightedSection.astro";
+import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import TeaserCard from "./components/TeaserCard.astro";
-import TaskCard from "./components/TaskCard.astro";
 import FindingBlock from "./components/FindingBlock.astro";
 import SourceCard from "./components/SourceCard.astro";
 import ExampleBlock from "./components/ExampleBlock.astro";
+
+import overviewPng from "./pages/assets/overview.png";
 
 {/* ============================================================
      SECTION 1: HERO
@@ -145,27 +147,11 @@ Contact · motion · progress · temporal · primitive cues. Dense diagnostic si
 
 ## Task taxonomy
 
-### Static Monitoring
+<Figure>
+  <Picture slot="figure" src={overviewPng} alt="RoboProcessBench task taxonomy overview" />
+  <Fragment slot="caption">Overview of the 12 diagnostic process-understanding tasks across Static Monitoring and Dynamic Reasoning categories.</Fragment>
+</Figure>
 
-<div class="not-prose grid grid-cols-1 gap-3 sm:grid-cols-2">
-  <TaskCard id="T1" name="Phase" inputType="single frame" question="Current coarse phase?" />
-  <TaskCard id="T2" name="Contact" inputType="single frame" question="Task-relevant contact established?" />
-  <TaskCard id="T4" name="Bimanual" inputType="ordered clip" question="Arms operating in coordination?" />
-  <TaskCard id="T10" name="Current Primitive" inputType="single frame" question="Which primitive is active?" />
-</div>
-
-### Dynamic Reasoning
-
-<div class="not-prose grid grid-cols-1 gap-3 sm:grid-cols-2">
-  <TaskCard id="T3" name="Motion Direction" inputType="ordered clip" question="Dominant motion direction?" />
-  <TaskCard id="T5" name="Progress" inputType="ordered clip" question="How far along is the current primitive?" />
-  <TaskCard id="T6" name="Motion State" inputType="ordered clip" question="Moving or stopped?" />
-  <TaskCard id="T7" name="Outcome Prediction" inputType="ordered clip" question="Will this manipulation succeed?" />
-  <TaskCard id="T8" name="Temporal Ordering" inputType="shuffled frames" question="Correct chronological order?" />
-  <TaskCard id="T9" name="Earlier Frame" inputType="pairwise frames" question="Which frame occurs earlier?" />
-  <TaskCard id="T11" name="Next Primitive" inputType="ordered clip" question="What primitive should follow?" />
-  <TaskCard id="T12" name="Chain Restoration" inputType="ordered clip + masked chain" question="Restore the correct primitive sequence." />
-</div>
 
 {/* ============================================================
      SECTION 5: PROCESSDATA-58K
