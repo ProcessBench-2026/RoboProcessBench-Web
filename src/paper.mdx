@@ -13,7 +13,7 @@ authors:
     notes: ["2"]
   - name: Yingjie Zhou
     notes: ["2"]
-  - name: Hua chan
+  - name: Hua Chen
     notes: ["1"]
   - name: Yang Liu
     notes: ["4"]
@@ -47,9 +47,6 @@ links:
   - name: Data
     url: "#"
     icon: ri:database-2-line
-  - name: Leaderboard
-    url: "#leaderboard"
-    icon: ri:bar-chart-line
   - name: BibTeX
     url: "#citation"
     icon: ri:code-s-slash-line
@@ -60,18 +57,9 @@ description: "RoboProcessBench: a process-aware benchmark and supervision corpus
 thumbnail: screenshot-light.png
 ---
 
-import Video from "./components/Video.astro";
 import HighlightedSection from "./components/HighlightedSection.astro";
-import SmallCaps from "./components/SmallCaps.astro";
-import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
-import TwoColumns from "./components/TwoColumns.astro";
-import YouTubeVideo from "./components/YouTubeVideo.astro";
-import Carousel from "./components/Carousel.astro";
-import CarouselSlide from "./components/CarouselSlide.astro";
-import Wide from "./components/Wide.astro";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
-import { Comparison } from "./components/Comparison.tsx";
 import TeaserCard from "./components/TeaserCard.astro";
 import TaskCard from "./components/TaskCard.astro";
 import FindingBlock from "./components/FindingBlock.astro";
@@ -79,33 +67,48 @@ import SourceCard from "./components/SourceCard.astro";
 import ExampleBlock from "./components/ExampleBlock.astro";
 
 {/* ============================================================
-     SECTION 1: HERO PUNCHLINE (below the template's title/authors/links)
+     SECTION 1: HERO
      ============================================================ */}
 
 <HighlightedSection>
 
 **RoboProcessBench** evaluates whether VLMs understand *how* robotic manipulation unfolds, not only whether it succeeds.
 
-A process-aware benchmark and supervision corpus with 12 diagnostic task families, ~58k QA items, 260 manipulation tasks, and SFT-trained VLM process evaluators.
+<div class="not-prose mt-4 grid grid-cols-3 gap-3 text-center">
+  <div class="rounded-xl bg-white/60 p-4">
+    <div class="text-3xl font-bold text-primary">12</div>
+    <div class="mt-1 text-xs text-muted-foreground">Diagnostic task families<br/><span class="text-[10px]">Static Monitoring + Dynamic Reasoning</span></div>
+  </div>
+  <div class="rounded-xl bg-white/60 p-4">
+    <div class="text-3xl font-bold text-primary">~58k</div>
+    <div class="mt-1 text-xs text-muted-foreground">Process-aware QA pairs</div>
+  </div>
+  <div class="rounded-xl bg-white/60 p-4">
+    <div class="text-3xl font-bold text-primary">260</div>
+    <div class="mt-1 text-xs text-muted-foreground">Manipulation tasks</div>
+  </div>
+</div>
 
 </HighlightedSection>
 
 {/* ============================================================
-     SECTION 2: TEASER CARDS
+     SECTION 2: OVERVIEW
      ============================================================ */}
+
+## Overview
 
 <div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-3">
   <TeaserCard
     title="Process-aware evaluation"
-    description="12 diagnostic QA families covering phase, contact, motion, progress, temporal order, outcome, and primitive chains."
+    description="Evaluate contact, motion, progress, temporal order, and primitive-level process cues across 12 diagnostic families."
   />
   <TeaserCard
     title="ProcessData-58k"
-    description="~58k QA items across 260 manipulation tasks from physically grounded execution traces."
+    description="A physically grounded QA corpus built from 260 manipulation execution traces."
   />
   <TeaserCard
-    title="Trainable process evaluators"
-    description="SFT on ProcessData improves Qwen- and InternVL-based VLMs on local state, motion, progress, and primitive-aware cues."
+    title="Trainable evaluators"
+    description="SFT on ProcessData turns benchmark supervision into VLM-based process evaluators."
   />
 </div>
 
@@ -115,64 +118,62 @@ A process-aware benchmark and supervision corpus with 12 diagnostic task familie
 
 ## Why process-aware?
 
-<div class="not-prose grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="not-prose grid grid-cols-1 gap-4 md:grid-cols-2">
   <div class="rounded-xl border border-border bg-card p-5">
 
-##### Outcome-only evaluation
+**Outcome-only evaluation**
 
-**Did the task succeed?** Only the final success state is considered.
+Did the task succeed?
+
+Final-state judgment. Sparse signal.
 
   </div>
-  <div class="rounded-xl border border-border bg-card p-5">
+  <div class="rounded-xl border-2 border-primary/30 bg-blue-50/50 p-5 dark:bg-blue-950/20">
 
-##### Process-aware evaluation
+**Process-aware evaluation**
 
-<ul>
-  <li>Has contact been established?</li>
-  <li>Is the robot still moving?</li>
-  <li>Is the primitive early, middle, or late?</li>
-  <li>Are frames temporally consistent?</li>
-  <li>What primitive should happen next?</li>
-</ul>
+Is the execution unfolding correctly?
+
+Contact · motion · progress · temporal · primitive cues. Dense diagnostic signal.
 
   </div>
 </div>
 
 {/* ============================================================
-     SECTION 4: 12 TASK TAXONOMY
+     SECTION 4: TASK TAXONOMY
      ============================================================ */}
 
 ## Task taxonomy
 
 ### Static Monitoring
 
-<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <TaskCard id="T1" name="Phase Recognition" inputType="single frame" question="Which phase is the robot currently in?" />
-  <TaskCard id="T2" name="Contact Detection" inputType="single frame" question="Has the gripper made contact with the object?" />
-  <TaskCard id="T4" name="Bimanual Coordination" inputType="single frame" question="Are both arms operating in a coordinated manner?" />
-  <TaskCard id="T10" name="Current Primitive Recognition" inputType="single frame" question="Which primitive is the robot currently executing?" />
+<div class="not-prose grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <TaskCard id="T1" name="Phase" inputType="single frame" question="Current coarse phase?" />
+  <TaskCard id="T2" name="Contact" inputType="single frame" question="Task-relevant contact established?" />
+  <TaskCard id="T4" name="Bimanual" inputType="ordered clip" question="Arms operating in coordination?" />
+  <TaskCard id="T10" name="Current Primitive" inputType="single frame" question="Which primitive is active?" />
 </div>
 
 ### Dynamic Reasoning
 
-<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <TaskCard id="T3" name="Motion Direction" inputType="ordered clip" question="In which direction is the end-effector moving?" />
-  <TaskCard id="T5" name="Primitive-local Progress" inputType="ordered clip" question="How far along is the current primitive? (early / middle / late)" />
-  <TaskCard id="T6" name="Motion State" inputType="ordered clip" question="Is the robot currently moving or stopped?" />
+<div class="not-prose grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <TaskCard id="T3" name="Motion Direction" inputType="ordered clip" question="Dominant motion direction?" />
+  <TaskCard id="T5" name="Progress" inputType="ordered clip" question="How far along is the current primitive?" />
+  <TaskCard id="T6" name="Motion State" inputType="ordered clip" question="Moving or stopped?" />
   <TaskCard id="T7" name="Outcome Prediction" inputType="ordered clip" question="Will this manipulation succeed?" />
-  <TaskCard id="T8" name="Temporal Ordering" inputType="shuffled frames" question="What is the correct chronological order of these frames?" />
-  <TaskCard id="T9" name="Temporal Priority" inputType="pairwise frames" question="Which frame occurs earlier in the manipulation?" />
-  <TaskCard id="T11" name="Next Primitive" inputType="ordered clip" question="What primitive should the robot execute next?" />
-  <TaskCard id="T12" name="Primitive Chain Restoration" inputType="shuffled primitives" question="What is the correct sequence of primitives for this task?" />
+  <TaskCard id="T8" name="Temporal Ordering" inputType="shuffled frames" question="Correct chronological order?" />
+  <TaskCard id="T9" name="Earlier Frame" inputType="pairwise frames" question="Which frame occurs earlier?" />
+  <TaskCard id="T11" name="Next Primitive" inputType="ordered clip" question="What primitive should follow?" />
+  <TaskCard id="T12" name="Chain Restoration" inputType="ordered clip + masked chain" question="Restore the correct primitive sequence." />
 </div>
 
 {/* ============================================================
-     SECTION 5: DATASET
+     SECTION 5: PROCESSDATA-58K
      ============================================================ */}
 
 ## ProcessData-58k
 
-ProcessData is constructed from four physically grounded manipulation datasets, each contributing distinct process-relevant supervision signals.
+ProcessData is built from four physically grounded manipulation datasets, each contributing distinct process-relevant signals.
 
 <div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
   <SourceCard name="GM-100" description="Long-tail goal-conditioned manipulation trajectories." />
@@ -181,16 +182,16 @@ ProcessData is constructed from four physically grounded manipulation datasets, 
   <SourceCard name="AIST-Bimanual" description="Bimanual motion and coordination sequences." />
 </div>
 
-### Coverage matrix
-
-| Signal | GM-100 | RH20T | REASSEMBLE | AIST-Bimanual |
-| :--- | :---: | :---: | :---: | :---: |
-| Phase | ✓ | ✓ | ✓ |   |
-| Contact |   | ✓ | ✓ |   |
-| Motion | ✓ | ✓ |   | ✓ |
-| Primitive |   |   | ✓ |   |
-| Progress | ✓ | ✓ | ✓ |   |
-| Bimanual |   |   |   | ✓ |
+<div class="not-prose mt-4 flex flex-wrap gap-2">
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Phase</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Contact</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Motion</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Progress</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Temporal</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Primitive</span>
+  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Bimanual</span>
+</div>
+<p class="text-xs text-muted-foreground mt-2">Multi-source coverage across seven key process signal dimensions.</p>
 
 {/* ============================================================
      SECTION 6: RESULTS
@@ -204,160 +205,106 @@ Current VLMs are fragmented: they can recognize some local states, but struggle 
 
 <div class="not-prose space-y-3">
   <FindingBlock number={1} title="Zero-shot strengths are fragmented. No single VLM excels across all 12 tasks; strengths cluster by task family." />
-  <FindingBlock number={2} title="Local process states are easier than local progress. VLMs recognize static states (contact, phase) but fail on within-primitive progress estimation (T5)." />
-  <FindingBlock number={3} title="Temporal reconstruction remains near chance. Temporal ordering (T8) and temporal priority (T9) are the hardest tasks across all models." />
+  <FindingBlock number={2} title="Local process states are easier than primitive-local progress. VLMs recognize static states (contact, phase) but fail on within-primitive progress estimation (T5)." />
+  <FindingBlock number={3} title="Temporal reconstruction remains near chance. Temporal ordering (T8) and earlier-frame (T9) are the hardest tasks across all models." />
 </div>
 
-### Compact results
+### From benchmark to supervision
 
-| Category | Avg. Accuracy |
-| :--- | :---: |
-| Static Monitoring (T1, T2, T4, T10) | — |
-| Dynamic Reasoning (T3, T5–T9, T11, T12) | — |
-| Hardest tasks (T5, T8, T9) | — |
+ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning on ProcessData-SFT yields task-family-level diagnostic gains on contact (T2), motion direction (T3), progress (T5), temporal ordering (T8), and next primitive (T11).
 
-<details>
-<summary>Show full benchmark table (14 models × 12 tasks)</summary>
-
-Full benchmark results will be available upon release. Check back soon for the complete leaderboard.
-
-</details>
-
-{/* ============================================================
-     SECTION 7: SFT
-     ============================================================ */}
-
-## ProcessData-SFT: from benchmark to trainable supervision
-
-Beyond benchmarking, ProcessData enables supervised fine-tuning to build dedicated process evaluators.
-
-<div class="not-prose text-center text-sm text-muted-foreground space-y-1 italic">
-  <div>Base VLM (Qwen2.5-VL-7B / InternVL-3-8B)</div>
-  <div>↓ SFT on ProcessData-SFT</div>
+<div class="not-prose mt-4 text-center text-sm text-muted-foreground">
+  <div>Qwen2.5-VL-7B / InternVL-3-8B</div>
+  <div class="text-secondary">↓ ProcessData-SFT</div>
   <div>Process evaluator</div>
-  <div>↓ held-out ProcessData-Eval</div>
-  <div>Improved local state / motion / primitive-aware reasoning</div>
+  <div class="text-secondary">↓ held-out ProcessData-Eval</div>
+  <div>Improved local state · motion · primitive-aware reasoning</div>
 </div>
 
-### Task-family-level improvements
-
-SFT brings notable gains on specific diagnostic dimensions:
-
-| Task | Description | Improvement |
-| :--- | :--- | :---: |
-| T2 | Contact Detection | — |
-| T3 | Motion Direction | — |
-| T5 | Primitive-local Progress | — |
-| T8 | Temporal Ordering | — |
-| T11 | Next Primitive | — |
-
 {/* ============================================================
-     SECTION 8: QUALITATIVE EXAMPLES
+     SECTION 7: QUALITATIVE EXAMPLES
      ============================================================ */}
 
 ## Qualitative examples
 
-<ExampleBlock
-  title="Contact detection"
-  frames={[]}
-  question="Has the gripper made contact with the object?"
-  gtAnswer="Yes"
-  predAnswer="Yes"
-  explanation="The VLM correctly detects the contact point from the visual frame."
-/>
-
-<ExampleBlock
-  title="Primitive-local progress"
-  frames={[]}
-  question="Is the current primitive early, middle, or late?"
-  gtAnswer="Middle"
-  predAnswer="Late"
-  explanation="The VLM overestimates progress; fine-grained temporal cues remain challenging."
-/>
-
-<ExampleBlock
-  title="Temporal ordering — failure case"
-  frames={[]}
-  question="What is the correct order of frames A, B, C?"
-  gtAnswer="A → C → B"
-  predAnswer="A → B → C"
-  explanation="Temporal ordering (T8) remains near chance for most VLMs. Subtle motion cues are easily confused."
-  isFailure={true}
-/>
-
-<ExampleBlock
-  title="Next primitive prediction"
-  frames={[]}
-  question="What primitive should happen next?"
-  gtAnswer="Grasp"
-  predAnswer="Grasp"
-  explanation="Primitive-chain reasoning from visual context is a relative strength of process-aware VLMs."
-/>
-
-{/* ============================================================
-     SECTION 9: LEADERBOARD
-     ============================================================ */}
-
-## Leaderboard
-
-We report task-wise accuracy across 12 diagnostic process-understanding families.
-
-| Model | Static Avg. | Dynamic Avg. | T5 Progress | T8 Temporal Order | T9 Temporal Priority | Overall |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| GPT-4o | — | — | — | — | — | — |
-| Gemini-2.5-Pro | — | — | — | — | — | — |
-| Qwen2.5-VL-72B | — | — | — | — | — | — |
-| InternVL-3-78B | — | — | — | — | — | — |
-| Qwen2.5-VL-7B | — | — | — | — | — | — |
-| InternVL-3-8B | — | — | — | — | — | — |
-| ProcessData-SFT-Qwen | — | — | — | — | — | — |
-| ProcessData-SFT-Intern | — | — | — | — | — | — |
-
-<details>
-<summary>Show full 12-task breakdown</summary>
-
-Full per-task results across all 14 models will be released with the dataset.
-
-</details>
+<Tabs defaultValue="contact">
+  <TabsList>
+    <TabsTrigger value="contact">Contact</TabsTrigger>
+    <TabsTrigger value="progress">Progress</TabsTrigger>
+    <TabsTrigger value="temporal">Temporal failure</TabsTrigger>
+    <TabsTrigger value="next">Next primitive</TabsTrigger>
+  </TabsList>
+  <TabsContent value="contact">
+    <ExampleBlock
+      title="Contact detection"
+      frames={[]}
+      question="Has the gripper made contact with the object?"
+      gtAnswer="Yes"
+      predAnswer="Yes"
+      explanation="The VLM correctly detects the contact point from the visual frame."
+    />
+  </TabsContent>
+  <TabsContent value="progress">
+    <ExampleBlock
+      title="Primitive-local progress"
+      frames={[]}
+      question="Is the current primitive early, middle, or late?"
+      gtAnswer="Middle"
+      predAnswer="Late"
+      explanation="The VLM overestimates progress; fine-grained temporal cues remain challenging."
+    />
+  </TabsContent>
+  <TabsContent value="temporal">
+    <ExampleBlock
+      title="Temporal ordering — failure case"
+      frames={[]}
+      question="What is the correct order of frames A, B, C?"
+      gtAnswer="A → C → B"
+      predAnswer="A → B → C"
+      explanation="Temporal ordering (T8) remains near chance for most VLMs. Subtle motion cues are easily confused."
+      isFailure={true}
+    />
+  </TabsContent>
+  <TabsContent value="next">
+    <ExampleBlock
+      title="Next primitive prediction"
+      frames={[]}
+      question="What primitive should happen next?"
+      gtAnswer="Grasp"
+      predAnswer="Grasp"
+      explanation="Primitive-chain reasoning from visual context is a relative strength."
+    />
+  </TabsContent>
+</Tabs>
 
 {/* ============================================================
-     SECTION 10: RELEASE
+     SECTION 8: RELEASE & CITATION
      ============================================================ */}
 
-## Release & reproducibility
+## Release
 
-<div class="not-prose grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
   <div class="rounded-xl border border-border bg-card p-5">
-
-**Resources**
-
-<ul>
-  <li><strong>ProcessData-SFT</strong> — training set for supervised fine-tuning</li>
-  <li><strong>ProcessData-Eval</strong> — held-out evaluation set</li>
-  <li><strong>Evaluation prompts</strong> — task templates and scoring protocols</li>
-  <li><strong>Metadata & splits</strong> — task taxonomy, train/test splits</li>
-</ul>
-
+    <h4 class="!mt-0">Dataset</h4>
+    <p class="text-xs text-muted-foreground">ProcessData-SFT & ProcessData-Eval, metadata, splits, annotation details.</p>
+    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Download</a>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
-
-**Links**
-
-<ul>
-  <li>Code repository</li>
-  <li>Dataset download</li>
-  <li>Evaluation scripts</li>
-  <li>Model checkpoints</li>
-  <li>Annotation & construction details</li>
-  <li>License</li>
-</ul>
-
+    <h4 class="!mt-0">Evaluation</h4>
+    <p class="text-xs text-muted-foreground">Prompt templates, scoring scripts, per-task evaluation protocol.</p>
+    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Scripts</a>
+  </div>
+  <div class="rounded-xl border border-border bg-card p-5">
+    <h4 class="!mt-0">Models</h4>
+    <p class="text-xs text-muted-foreground">ProcessData-SFT-Qwen, ProcessData-SFT-Intern checkpoints.</p>
+    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Checkpoints</a>
+  </div>
+  <div class="rounded-xl border border-border bg-card p-5">
+    <h4 class="!mt-0">Documentation</h4>
+    <p class="text-xs text-muted-foreground">Construction details, license, reproducibility guide.</p>
+    <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Docs</a>
   </div>
 </div>
-
-{/* ============================================================
-     SECTION 11: CITATION
-     ============================================================ */}
 
 ## Citation
 
@@ -368,15 +315,11 @@ If you use RoboProcessBench, ProcessData, or the evaluation suite, please cite:
   title     = {RoboProcessBench: Benchmarking Process-Aware Understanding in
                Vision-Language Robotic Manipulation},
   author    = {Xia, Dayu and Shi, Yue and Mu, Yao and Ji, Huiting and
-               Ma, Chaofan and Zhou, Yingjie and chan, Hua and
+               Ma, Chaofan and Zhou, Yingjie and Chen, Hua and
                Liu, Yang and Cao, Jiezhang and Zhai, Guangtao},
   year      = {2025},
 }
 ```
-
-{/* ============================================================
-     BIBLIOGRAPHY
-     ============================================================ */}
 
 ## Bibliography
 
