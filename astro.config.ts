@@ -50,8 +50,8 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Crimson Pro",
-      cssVariable: "--font-crimson",
+      name: "Source Serif 4",
+      cssVariable: "--font-source-serif",
       weights: ["200 900"],
       styles: ["normal", "italic"],
     },
