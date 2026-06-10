@@ -97,7 +97,7 @@ import overviewPng from "./pages/assets/overview.png";
      SECTION 2: OVERVIEW
      ============================================================ */}
 
-## Overview
+## 🔍 Overview
 
 <div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-3">
   <TeaserCard
@@ -118,7 +118,7 @@ import overviewPng from "./pages/assets/overview.png";
      SECTION 3: WHY PROCESS-AWARE?
      ============================================================ */}
 
-## Why process-aware?
+## ⚖️ Why process-aware?
 
 <div class="not-prose grid grid-cols-1 gap-4 md:grid-cols-2">
   <div class="rounded-xl border border-border bg-card p-5">
@@ -145,7 +145,7 @@ Contact · motion · progress · temporal · primitive cues. Dense diagnostic si
      SECTION 4: TASK TAXONOMY
      ============================================================ */}
 
-## Task taxonomy
+## 🧩 Task taxonomy
 
 <Figure>
   <Picture slot="figure" src={overviewPng} alt="RoboProcessBench task taxonomy overview" />
@@ -157,7 +157,7 @@ Contact · motion · progress · temporal · primitive cues. Dense diagnostic si
      SECTION 5: PROCESSDATA-58K
      ============================================================ */}
 
-## ProcessData-58k
+## 📦 ProcessData-58k
 
 ProcessData is built from four physically grounded manipulation datasets, each contributing distinct process-relevant signals.
 
@@ -183,9 +183,9 @@ ProcessData is built from four physically grounded manipulation datasets, each c
      SECTION 6: RESULTS
      ============================================================ */}
 
-## Results
+## 📊 Results
 
-### Key findings
+### 💡 Key findings
 
 Current VLMs are fragmented: they can recognize some local states, but struggle with primitive-local progress and temporal reasoning.
 
@@ -195,7 +195,7 @@ Current VLMs are fragmented: they can recognize some local states, but struggle 
   <FindingBlock number={3} title="Temporal reconstruction remains near chance. Temporal ordering (T8) and earlier-frame (T9) are the hardest tasks across all models." />
 </div>
 
-### From benchmark to supervision
+### 🔄 From benchmark to supervision
 
 ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning on ProcessData-SFT yields task-family-level diagnostic gains on contact (T2), motion direction (T3), progress (T5), temporal ordering (T8), and next primitive (T11).
 
@@ -256,7 +256,7 @@ ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning 
      SECTION 7: QUALITATIVE EXAMPLES
      ============================================================ */}
 
-## Qualitative examples
+## 🔬 Qualitative examples
 
 <Tabs defaultValue="contact">
   <TabsList>
@@ -312,32 +312,32 @@ ProcessData also enables SFT to build dedicated process evaluators. Fine-tuning 
      SECTION 8: RELEASE & CITATION
      ============================================================ */}
 
-## Release
+## 🚀 Release
 
 <div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
   <div class="rounded-xl border border-border bg-card p-5">
-    <h4 class="!mt-0">Dataset</h4>
+    <h4 class="!mt-0">💾 Dataset</h4>
     <p class="text-xs text-muted-foreground">ProcessData-SFT & ProcessData-Eval, metadata, splits, annotation details.</p>
     <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Download</a>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
-    <h4 class="!mt-0">Evaluation</h4>
+    <h4 class="!mt-0">🧪 Evaluation</h4>
     <p class="text-xs text-muted-foreground">Prompt templates, scoring scripts, per-task evaluation protocol.</p>
     <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Scripts</a>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
-    <h4 class="!mt-0">Models</h4>
+    <h4 class="!mt-0">🧠 Models</h4>
     <p class="text-xs text-muted-foreground">ProcessData-SFT-Qwen, ProcessData-SFT-Intern checkpoints.</p>
     <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Checkpoints</a>
   </div>
   <div class="rounded-xl border border-border bg-card p-5">
-    <h4 class="!mt-0">Documentation</h4>
+    <h4 class="!mt-0">📖 Documentation</h4>
     <p class="text-xs text-muted-foreground">Construction details, license, reproducibility guide.</p>
     <a href="#" class="inline-block mt-2 rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground no-underline hover:bg-primary-accent">Docs</a>
   </div>
 </div>
 
-## Citation
+## 📝 Citation
 
 If you use RoboProcessBench, ProcessData, or the evaluation suite, please cite:
 
