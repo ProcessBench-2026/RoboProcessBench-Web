@@ -58,7 +58,9 @@ thumbnail: screenshot-light.png
 ---
 
 import HighlightedSection from "./components/HighlightedSection.astro";
+import Picture from "./components/Picture.astro";
 import Wide from "./components/Wide.astro";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import TeaserCard from "./components/TeaserCard.astro";
 import FindingBlock from "./components/FindingBlock.astro";
 import SourceCard from "./components/SourceCard.astro";
@@ -291,6 +293,18 @@ Current VLMs are fragmented: they can recognize some local states, but struggle 
 
 ### 📋 Comprehensive evaluation on RoboProcessBench
 
+<Tabs defaultValue="radar">
+  <TabsList>
+    <TabsTrigger value="radar">Radar Results</TabsTrigger>
+    <TabsTrigger value="full">Full Results</TabsTrigger>
+  </TabsList>
+  <TabsContent value="radar">
+    <div class="flex justify-center py-6">
+      <img src="/radar.png" alt="RoboProcessBench radar results" class="max-w-full rounded-xl" />
+    </div>
+  </TabsContent>
+  <TabsContent value="full">
+
 <Wide>
 
 <div class="not-prose overflow-x-auto rounded-xl border border-border shadow-sm">
@@ -418,6 +432,9 @@ Current VLMs are fragmented: they can recognize some local states, but struggle 
 </Wide>
 
 <p class="text-[11px] text-muted-foreground mt-2 leading-relaxed">Accuracy (%) on ProcessData-Eval. <span class="font-semibold text-primary">Best</span> per task among zero-shot models. Post-trained scores in <span class="font-bold text-secondary">orange bold</span>. Static Monitoring: T1, T2, T4, T10. Dynamic Reasoning: T3, T5–T9, T11, T12.</p>
+
+  </TabsContent>
+</Tabs>
 
 ### 🔄 From benchmark to supervision
 
