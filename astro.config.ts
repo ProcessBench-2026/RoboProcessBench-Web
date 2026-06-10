@@ -50,9 +50,10 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Noto Sans",
-      cssVariable: "--font-noto-sans",
-      weights: ["100 900"],
+      name: "Crimson Pro",
+      cssVariable: "--font-crimson",
+      weights: ["200 900"],
+      styles: ["normal", "italic"],
     },
   ],
   image: {
