@@ -62,7 +62,6 @@ import Picture from "./components/Picture.astro";
 import Wide from "./components/Wide.astro";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
 import TeaserCard from "./components/TeaserCard.astro";
-import SourceCard from "./components/SourceCard.astro";
 
 import radarPng from "../public/radar.png";
 
@@ -237,30 +236,8 @@ The 12 tasks cover current-state monitoring, temporal reasoning, and primitive-a
      SECTION 5: PROCESSDATA-58K
      ============================================================ */}
 
-## 📦 ProcessData-58k
-
-ProcessData is built from four physically grounded manipulation datasets, each contributing distinct process-relevant signals.
-
-<div class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <SourceCard name="GM-100" description="Long-tail goal-conditioned manipulation trajectories." />
-  <SourceCard name="RH20T" description="Contact-rich multimodal demonstration traces." />
-  <SourceCard name="REASSEMBLE" description="Primitive-level action chains with fine-grained segmentation." />
-  <SourceCard name="AIST-Bimanual" description="Bimanual motion and coordination sequences." />
-</div>
-
-<div class="not-prose mt-4 flex flex-wrap gap-2">
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Phase</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Contact</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Motion</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Progress</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Temporal</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Primitive</span>
-  <span class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium">Bimanual</span>
-</div>
-<p class="text-xs text-muted-foreground mt-2">Multi-source coverage across seven key process signal dimensions.</p>
-
 {/* ============================================================
-     SECTION 6: RESULTS
+     SECTION 5: RESULTS
      ============================================================ */}
 
 ## 📊 Results
