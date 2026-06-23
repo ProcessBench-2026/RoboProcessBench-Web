@@ -76,11 +76,11 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
         {conference && <div>{conference}</div>}
         {notes && <Notes notes={notes} />}
         <div class="not-prose flex flex-row flex-wrap items-center justify-center gap-x-10 gap-y-3 py-2">
-          <img src={prefix + "logos/shanghai-ailab.png"} alt="Shanghai AI Laboratory" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src={prefix + "logos/zhejiang.png"} alt="Zhejiang University" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src={prefix + "logos/shanghai-jiaotong.png"} alt="Shanghai Jiaotong University" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src={prefix + "logos/tsinghua.png"} alt="Tsinghua University" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src={prefix + "logos/cumt.png"} alt="China University of Mining Technology" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src={prefix + "logos/shanghai-ailab.png"} alt="Shanghai AI Laboratory" class="h-12 w-auto opacity-85 hover:opacity-100 transition-opacity" />
+          <img src={prefix + "logos/zhejiang.png"} alt="Zhejiang University" class="h-12 w-auto opacity-85 hover:opacity-100 transition-opacity" />
+          <img src={prefix + "logos/shanghai-jiaotong.png"} alt="Shanghai Jiaotong University" class="h-12 w-auto opacity-85 hover:opacity-100 transition-opacity" />
+          <img src={prefix + "logos/tsinghua.png"} alt="Tsinghua University" class="h-12 w-auto opacity-85 hover:opacity-100 transition-opacity" />
+          <img src={prefix + "logos/cumt.png"} alt="China University of Mining Technology" class="h-12 w-auto opacity-85 hover:opacity-100 transition-opacity" />
         </div>
         {links && <Links links={links} />}
       </div>
