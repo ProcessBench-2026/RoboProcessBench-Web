@@ -65,6 +65,8 @@ import TeaserCard from "./components/TeaserCard.astro";
 import FindingBlock from "./components/FindingBlock.astro";
 import SourceCard from "./components/SourceCard.astro";
 
+import radarPng from "../public/radar.png";
+
 {/* ============================================================
      SECTION 1: HERO
      ============================================================ */}
@@ -283,7 +285,7 @@ Current VLMs are fragmented: they can recognize some local states, but struggle 
   </TabsList>
   <TabsContent value="radar">
     <div class="flex justify-center py-6">
-      <img src="/radar.png" alt="RoboProcessBench radar results" class="max-w-full rounded-xl" />
+      <Picture src={radarPng} alt="RoboProcessBench radar results" />
     </div>
   </TabsContent>
   <TabsContent value="full">
